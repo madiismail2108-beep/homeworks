@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students List</title>
+    <style>
+
+        body {
+                font-family: "Poppins", sans-serif;
+                background: #d8f1ab;
+                margin: 0;
+                padding: 0;
+        }
+
+        header {
+            background-color: #4e73df;
+            color: rgb(246, 227, 227);
+            text-align: center;
+            padding: 20px 0;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 20px 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        thead {
+            background-color: #4e73df;
+            color: white;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fc;
+        }
+
+        th {
+            font-weight: 600;
+        }
+
+        .add-btn {
+            display: inline-block;
+            background-color: #1cc88a;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            transition: background 0.3s ease;
+        }
+
+         .add-btn:hover {
+            background-color: #17a673;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+         </style>
+</head>
+<body>
+    <header>Book List</header>
+
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for books in data %}
+                <tr>
+                    <td>{{ book.id }}</td>
+                    <td>
+                        <a href="{% url 'student-detail' student.pk %}">
+                            {{ Book.name }}
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="2">No books found.</td>
+                </tr>
+                <tr>
+                    <td colspan="5" style="text-align:center;">No books found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <footer>© {{ now|date:"Y" }} Book Management System</footer>
+    <footer>
+        <h3>
+            <a href="{% url 'add-book' %}" style="color: rgb(103, 103, 253);">Add Book</a>
+        </h3>
+    </footer>
+</body>
+</html>

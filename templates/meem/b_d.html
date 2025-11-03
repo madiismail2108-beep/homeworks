@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ book.title }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+            padding: 40px;
+        }
+        .container {
+            background-color: white;
+            max-width: 600px;
+            margin: 0 auto;
+            border-radius: 10px;
+            padding: 20px 30px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        img {
+            display: block;
+            margin: 15px auto;
+            max-width: 100%;
+            border-radius: 5px;
+        }
+        p {
+            margin: 10px 0;
+        }
+        .actions {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .actions a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+        .edit { background-color: #28a745; }
+        .delete { background-color: #dc3545; }
+        .back { background-color: #007bff; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>{{ book.title }}</h2>
+        <p><strong>Author:</strong> {{ book.author }}</p>
+        <p><strong>Price:</strong> ${{ book.price }}</p>
+        <p><strong>Published:</strong> {{ book.created_date }}</p>
+        <p><strong>Description:</strong> {{ book.description }}</p>
+        <p><strong>Views:</strong> {{ book.number_of_views }}</p>
+
+        {% if book.image %}
+            <img src="{{ book.image.url }}" alt="{{ book.title }}">
+        {% endif %}
+        {% if book.file %}
+            <p><a href="{{ book.file.url }}">📄 Download File</a></p>
+        {% endif %}
+
+        <div class="actions">
+            <a href="{% url 'update-book' book.id %}" class="edit">Edit</a>
+            <a href="{% url 'delete-book' book.id %}" class="delete">Delete</a>
+            <a href="{% url 'home' %}" class="back">Back</a>
+        </div>
+    </div>
+</body>
+</html>
